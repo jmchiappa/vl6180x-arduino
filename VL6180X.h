@@ -2,6 +2,7 @@
 #define VL6180X_h
 
 #include <Arduino.h>
+#include <Wire.h>
 
 class VL6180X
 {
@@ -84,7 +85,7 @@ class VL6180X
     uint8_t last_status; // status of last I2C transmission
 
     VL6180X(void);
-
+    VL6180X(TwoWire *wire);
     void setAddress(uint8_t new_addr);
 
     void init(void);
@@ -124,6 +125,7 @@ class VL6180X
     uint8_t ptp_offset;
     uint16_t io_timeout;
     bool did_timeout;
+    TwoWire *InstanceWire = &Wire;
 };
 
 #endif

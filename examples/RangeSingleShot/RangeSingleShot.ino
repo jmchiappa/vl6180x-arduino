@@ -5,13 +5,14 @@ The range readings are in units of mm. */
 
 #include <Wire.h>
 #include <VL6180X.h>
+TwoWire instWire(SDA,SCL);
 
-VL6180X sensor;
+VL6180X sensor( &instWire);
 
 void setup() 
 {
   Serial.begin(9600);
-  Wire.begin();
+  instWire.begin();
   
   sensor.init();
   sensor.configureDefault();
