@@ -86,6 +86,8 @@ class VL6180X
 
     VL6180X(void);
     VL6180X(TwoWire *wire);
+    VL6180X(uint8_t i2c_addr);
+    
     void setAddress(uint8_t new_addr);
 
     void init(void);
