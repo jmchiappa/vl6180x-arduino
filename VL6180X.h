@@ -7,6 +7,13 @@
 class VL6180X
 {
   public:
+    enum MODE {
+      STOP,
+      DISTANCE_SINGLE,
+      DISTANCE_CONTINUOUS,
+      AMBIENT_SINGLE,
+      AMBIENT_CONTINUOUS
+    };
     // register addresses
     enum regAddr
     {
@@ -105,6 +112,7 @@ class VL6180X
     inline uint8_t getScaling(void) { return scaling; }
 
     uint8_t readRangeSingle(void);
+    uint16_t readRangeMillimeters(void);
     inline uint16_t readRangeSingleMillimeters(void) { return (uint16_t)scaling * readRangeSingle(); }
     uint16_t readAmbientSingle(void);
 
@@ -112,7 +120,7 @@ class VL6180X
     void startAmbientContinuous(uint16_t period = 500);
     void startInterleavedContinuous(uint16_t period = 500);
     void stopContinuous();
-
+    void setMode(uint8_t _mode);
     uint8_t readRangeContinuous(void);
     inline uint16_t readRangeContinuousMillimeters(void) { return (uint16_t)scaling * readRangeContinuous(); }
     uint16_t readAmbientContinuous(void);
@@ -122,6 +130,7 @@ class VL6180X
     bool timeoutOccurred(void);
 
   private:
+    uint8_t mode;
     uint8_t address;
     uint8_t scaling;
     uint8_t ptp_offset;

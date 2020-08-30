@@ -403,3 +403,25 @@ bool VL6180X::timeoutOccurred()
   did_timeout = false;
   return tmp;
 }
+uint16_t VL6180X::readRangeMillimeters(void) {
+  switch(mode) {
+    case DISTANCE_SINGLE:
+      return readRangeSingleMillimeters();
+      break;
+    case DISTANCE_CONTINUOUS:
+      return readRangeContinuousMillimeters();
+      break;
+    case AMBIENT_SINGLE:
+      return readAmbientSingle();
+      break;
+    case AMBIENT_CONTINUOUS:
+      return readAmbientContinuous();
+      break;
+    default:
+      break;
+  }
+}
+
+void VL6180X::setMode(uint8_t _mode){
+  mode = _mode;
+}
