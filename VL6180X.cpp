@@ -424,4 +424,8 @@ uint16_t VL6180X::readRangeMillimeters(void) {
 
 void VL6180X::setMode(uint8_t _mode){
   mode = _mode;
+  if(_mode==DISTANCE_CONTINUOUS)
+    startRangeContinuous();
+  else
+    stopContinuous();
 }
